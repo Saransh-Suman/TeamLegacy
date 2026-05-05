@@ -9,7 +9,7 @@ import ConsumerDashboard from './pages/consumer/Dashboard';
 import SearchPage from './pages/consumer/Search';
 import CourseDetail from './pages/consumer/CourseDetail';
 import CreatorDashboard from './pages/creator/Dashboard';
-import TrendingPage from './pages/creator/Trending';
+import TrendingPage from './pages/Trending';
 import CompetitorPage from './pages/creator/Competitor';
 import RegisterCourse from './pages/RegisterCourse';
 import MyCourses from './pages/MyCourses';
