@@ -27,8 +27,10 @@ export async function getCreatorSuggestions(course, competitors) {
   const response = await askClaude(prompt, systemPrompt);
   
   try {
-    const jsonMatch = response.match(/\{[\s\S]*\}/);
-    return JSON.parse(jsonMatch ? jsonMatch[0] : response);
+    // Strip markdown code blocks if present
+    const cleaned = response.replace(/```json\n?|```/g, '').trim();
+    const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
+    return JSON.parse(jsonMatch ? jsonMatch[0] : cleaned);
   } catch (error) {
     console.error('Failed to parse Claude response:', response);
     throw new Error('Failed to generate creator suggestions');
