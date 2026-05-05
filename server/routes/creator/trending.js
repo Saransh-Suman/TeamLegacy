@@ -1,14 +1,22 @@
 /**
- * Creator Trending Route
+ * Route: Creator Trending Topics
+ * Handles GET /api/creator/trending route.
  */
-
+import express from 'express';
 import { getTrending } from '../../services/creator/trendingService.js';
+
+const router = express.Router();
 
 export const getTrendingRoute = async (req, res) => {
   try {
-    const trends = await getTrending();
-    res.json(trends);
-  } catch (error) {
-    res.status(500).json({ error: true, message: error.message });
+    const results = await getTrending();
+    res.status(200).json({ success: true, count: results.length, topics: results });
+  } catch (err) {
+    res.status(500).json({ error: true, message: err.message });
   }
 };
+
+
+router.get('/trending', getTrendingRoute);
+
+export default router;
