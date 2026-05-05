@@ -21,7 +21,7 @@ const AISuggestions = () => {
       ]);
 
       setData(suggestionsRes.data);
-      setPriceData(priceRes.data);
+      setPriceData(priceRes.data?.analysis || null);
     } catch (err) {
       console.error('Error loading AI suggestions:', err);
       setError('Could not load suggestions. Try again.');

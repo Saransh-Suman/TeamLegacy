@@ -14,7 +14,7 @@ const PricingAnalysis = () => {
       try {
         setLoading(true);
         const response = await axios.get(`/api/creator/pricing-analysis/${id}`);
-        setData(response.data);
+        setData(response.data.analysis);
       } catch (error) {
         console.error('Error fetching pricing analysis:', error);
       } finally {

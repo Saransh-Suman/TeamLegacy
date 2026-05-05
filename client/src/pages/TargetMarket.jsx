@@ -16,7 +16,7 @@ const TargetMarket = () => {
     setHasSearched(true);
     try {
       const response = await axios.get(`/api/creator/target-market?topic=${encodeURIComponent(topic)}`);
-      setData(response.data);
+      setData(response.data.data);
     } catch (error) {
       console.error('Error fetching market insights:', error);
       setData(null);

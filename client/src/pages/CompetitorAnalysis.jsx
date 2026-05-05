@@ -17,7 +17,7 @@ const CompetitorAnalysis = () => {
     try {
       const response = await axios.get(`/api/creator/competitor?topic=${encodeURIComponent(topic)}`);
       // Sort by rating descending
-      const sorted = [...response.data].sort((a, b) => b.rating - a.rating).slice(0, 10);
+      const sorted = [...(response.data.competitors || [])].sort((a, b) => b.rating - a.rating).slice(0, 10);
       setCompetitors(sorted);
     } catch (error) {
       console.error('Error fetching competitors:', error);

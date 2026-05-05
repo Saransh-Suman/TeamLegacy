@@ -12,7 +12,7 @@ const TrendingPage = () => {
       try {
         setLoading(true);
         const response = await axios.get('/api/creator/trending');
-        setTrends(response.data);
+        setTrends(response.data.topics || []);
       } catch (error) {
         console.error('Error loading trending data:', error);
       } finally {

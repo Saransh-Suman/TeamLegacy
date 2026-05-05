@@ -3,7 +3,6 @@
  * Sets up middleware, routes, and error handling.
  */
 
-import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import userRoutes from './routes/user/index.js';
@@ -40,6 +39,18 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+// Graceful shutdown for node --watch
+const shutdown = () => {
+  console.log('Signal received: closing HTTP server');
+  server.close(() => {
+    console.log('HTTP server closed');
+    process.exit(0);
+  });
+};
+
+process.on('SIGTERM', shutdown);
+process.on('SIGINT', shutdown);

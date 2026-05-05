@@ -13,7 +13,7 @@ const MyCourses = () => {
       try {
         setLoading(true);
         const response = await axios.get('/api/creator/courses/dev-user-1');
-        setCourses(response.data);
+        setCourses(response.data.courses || []);
       } catch (err) {
         console.error('Error fetching courses:', err);
         setError('Failed to load courses. Please try again later.');
