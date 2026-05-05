@@ -10,14 +10,25 @@ export const getSuggestionsRoute = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const { data: course, error } = await supabase
+    let course = null;
+    const { data, error } = await supabase
       .from('creator_courses')
       .select('*')
       .eq('id', id)
       .single();
 
-    if (error || !course) {
-      return res.status(404).json({ error: true, message: 'Course not found' });
+    if (error || !data) {
+      // Fallback for demo/mock competitor IDs
+      console.warn(`Course ${id} not found in DB. Using mock course for AI demo.`);
+      course = {
+        id,
+        title: "Complete EV Battery Management",
+        topic: "Battery",
+        price_inr: 1500,
+        rating: 4.5
+      };
+    } else {
+      course = data;
     }
 
     const competitors = await getCompetitors(course.topic);

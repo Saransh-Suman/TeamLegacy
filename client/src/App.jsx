@@ -26,7 +26,7 @@ function App() {
             <div className="flex items-center">
               <Link to="/" className="text-xl font-bold text-emerald-600">EV Tracker</Link>
               <div className="ml-10 flex space-x-4">
-                <Link to="/" className="text-slate-600 hover:text-emerald-600 px-3 py-2 text-sm font-medium">Consumer</Link>
+                <Link to="/search" className="text-slate-600 hover:text-emerald-600 px-3 py-2 text-sm font-medium">Consumer</Link>
                 <Link to="/creator" className="text-slate-600 hover:text-emerald-600 px-3 py-2 text-sm font-medium">Creator</Link>
               </div>
             </div>
