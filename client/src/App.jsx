@@ -14,6 +14,8 @@ import CompetitorPage from './pages/CompetitorAnalysis';
 import RegisterCourse from './pages/RegisterCourse';
 import MyCourses from './pages/MyCourses';
 import PricingAnalysis from './pages/PricingAnalysis';
+import TargetMarket from './pages/TargetMarket';
+import AISuggestions from './pages/AISuggestions';
 
 function App() {
   return (
@@ -46,6 +48,8 @@ function App() {
           <Route path="/creator/register" element={<RegisterCourse />} />
           <Route path="/creator/courses" element={<MyCourses />} />
           <Route path="/pricing/:id" element={<PricingAnalysis />} />
+          <Route path="/creator/target-market" element={<TargetMarket />} />
+          <Route path="/suggestions/:id" element={<AISuggestions />} />
         </Routes>
       </main>
     </div>
