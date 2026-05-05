@@ -1,45 +1,76 @@
 /**
- * Creator Trending Service
+ * Service: Creator Trending Topics
+ * Computes trending EV course topics from scraped data.
  */
-
 import { supabase } from '../../lib/supabase.js';
 
 export async function getTrending() {
-  const { data: courses, error } = await supabase.from('courses').select('*');
+  const { data, error } = await supabase
+    .from('courses')
+    .select('id, topic, price_inr, rating');
 
-  if (error) throw error;
+  if (error) {
+    throw new Error(error.message);
+  }
 
-  const groupedByTopic = courses.reduce((acc, course) => {
-    const topic = course.topic || 'general';
+  if (!data || data.length === 0) {
+    return [];
+  }
+
+  const grouped = data.reduce((acc, course) => {
+    const topic = course.topic || 'unknown';
     if (!acc[topic]) {
       acc[topic] = {
-        topic,
         course_count: 0,
-        total_price: 0,
         prices: [],
-        total_rating: 0
+        ratings: []
       };
     }
-    acc[topic].course_count++;
-    acc[topic].total_price += course.price_inr;
-    acc[topic].prices.push(course.price_inr);
-    acc[topic].total_rating += course.rating || 0;
+    
+    acc[topic].course_count += 1;
+    
+    if (course.price_inr != null) {
+      acc[topic].prices.push(Number(course.price_inr));
+    }
+    
+    if (course.rating != null) {
+      acc[topic].ratings.push(Number(course.rating));
+    }
+    
     return acc;
   }, {});
 
-  const trends = Object.values(groupedByTopic).map(t => {
-    const avg_price = t.total_price / t.course_count;
-    const avg_rating = t.total_rating / t.course_count;
+  const topics = Object.keys(grouped).map(topic => {
+    const group = grouped[topic];
+    
+    const avg_price = group.prices.length > 0 
+      ? group.prices.reduce((sum, p) => sum + p, 0) / group.prices.length 
+      : 0;
+      
+    const min_price = group.prices.length > 0 
+      ? Math.min(...group.prices) 
+      : 0;
+      
+    const max_price = group.prices.length > 0 
+      ? Math.max(...group.prices) 
+      : 0;
+      
+    const avg_rating = group.ratings.length > 0 
+      ? group.ratings.reduce((sum, r) => sum + r, 0) / group.ratings.length 
+      : 0;
+      
+    const demand_score = group.course_count * avg_rating;
+
     return {
-      topic: t.topic,
-      course_count: t.course_count,
-      avg_price: Math.round(avg_price * 100) / 100,
-      min_price: Math.min(...t.prices),
-      max_price: Math.max(...t.prices),
-      avg_rating: Math.round(avg_rating * 100) / 100,
-      demand_score: Math.round((t.course_count * avg_rating) * 100) / 100
+      topic,
+      course_count: group.course_count,
+      avg_price: Number(avg_price.toFixed(2)),
+      min_price: Number(min_price.toFixed(2)),
+      max_price: Number(max_price.toFixed(2)),
+      avg_rating: Number(avg_rating.toFixed(2)),
+      demand_score: Number(demand_score.toFixed(2))
     };
   });
 
-  return trends.sort((a, b) => b.demand_score - a.demand_score);
+  return topics.sort((a, b) => b.demand_score - a.demand_score);
 }

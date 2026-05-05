@@ -3,7 +3,7 @@
  * Fetches data from the backend or falls back to mock data.
  */
 
-import mockData from '../../shared/mockData.json';
+import mockData from '../../../shared/mockData.json';
 
 const fetchWithFallback = async (url, mockKey) => {
   try {

@@ -24,17 +24,36 @@ const SearchPage = () => {
     loadResults();
   };
 
+  // const loadResults = async () => {
+  //   setLoading(true);
+
+  //   const data = await searchCourses({ q: query, ...filters });
+
+  //   const filtered = data.filter((c) => {
+  //     return (
+  //       (!filters.platform || c.platform === filters.platform) &&
+  //       (!filters.level || c.level === filters.level) &&
+  //       (!filters.topic || c.category === filters.topic) &&
+  //       c.price <= Number(filters.max_price) &&
+  //       (!query || c.title.toLowerCase().includes(query.toLowerCase()))
+  //     );
+  //   });
+
+  //   setResults(filtered);
+  //   setLoading(false);
+  // };
+
   return (
     <div className="flex flex-col lg:flex-row gap-8">
       {/* Sidebar */}
       <aside className="w-full lg:w-64 space-y-6">
         <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-100">
           <h3 className="font-bold text-slate-900 mb-4">Filters</h3>
-          
+
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-slate-700">Platform</label>
-              <select 
+              <select
                 className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
                 value={filters.platform}
                 onChange={(e) => setFilters({ ...filters, platform: e.target.value })}
@@ -48,7 +67,7 @@ const SearchPage = () => {
 
             <div>
               <label className="block text-sm font-medium text-slate-700">Max Price: ₹{filters.max_price}</label>
-              <input 
+              <input
                 type="range" min="0" max="10000" step="100"
                 className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600 mt-2"
                 value={filters.max_price}
@@ -58,7 +77,7 @@ const SearchPage = () => {
 
             <div>
               <label className="block text-sm font-medium text-slate-700">Level</label>
-              <select 
+              <select
                 className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
                 value={filters.level}
                 onChange={(e) => setFilters({ ...filters, level: e.target.value })}
@@ -72,7 +91,7 @@ const SearchPage = () => {
 
             <div>
               <label className="block text-sm font-medium text-slate-700">Topic</label>
-              <select 
+              <select
                 className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
                 value={filters.topic}
                 onChange={(e) => setFilters({ ...filters, topic: e.target.value })}
@@ -91,7 +110,7 @@ const SearchPage = () => {
       {/* Main Content */}
       <div className="flex-1 space-y-6">
         <form onSubmit={handleSearch} className="flex gap-2">
-          <input 
+          <input
             type="text"
             placeholder="Search EV courses..."
             className="flex-1 rounded-md border-slate-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
