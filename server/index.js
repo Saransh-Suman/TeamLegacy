@@ -9,6 +9,7 @@ import cors from 'cors';
 import userRoutes from './routes/user/index.js';
 import creatorRoutes from './routes/creator/index.js';
 import registerRoute from './routes/creator/register.js';
+import myCoursesRoute from './routes/creator/myCourses.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use('/api/courses', userRoutes);
 app.use('/api/creator', creatorRoutes);
 app.use('/api/creator', registerRoute);
+app.use('/api/creator', myCoursesRoute);
 
 // Global Error Handler
 app.use((err, req, res, next) => {
