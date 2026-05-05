@@ -59,21 +59,19 @@ const TrendingPage = () => {
           <div className="flex bg-slate-100 p-1 rounded-lg">
             <button
               onClick={() => setSortBy('demand_score')}
-              className={`px-4 py-1.5 text-sm font-bold rounded-md transition-all ${
-                sortBy === 'demand_score' 
-                  ? 'bg-white text-emerald-600 shadow-sm' 
+              className={`px-4 py-1.5 text-sm font-bold rounded-md transition-all ${sortBy === 'demand_score'
+                  ? 'bg-white text-emerald-600 shadow-sm'
                   : 'text-slate-500 hover:text-slate-700'
-              }`}
+                }`}
             >
               Demand Score
             </button>
             <button
               onClick={() => setSortBy('avg_rating')}
-              className={`px-4 py-1.5 text-sm font-bold rounded-md transition-all ${
-                sortBy === 'avg_rating' 
-                  ? 'bg-white text-emerald-600 shadow-sm' 
+              className={`px-4 py-1.5 text-sm font-bold rounded-md transition-all ${sortBy === 'avg_rating'
+                  ? 'bg-white text-emerald-600 shadow-sm'
                   : 'text-slate-500 hover:text-slate-700'
-              }`}
+                }`}
             >
               Avg Rating
             </button>
@@ -93,11 +91,10 @@ const TrendingPage = () => {
             </thead>
             <tbody>
               {sortedTrends.map((trend, index) => (
-                <tr 
-                  key={trend.topic} 
-                  className={`border-b border-slate-50 transition-colors hover:bg-slate-50/50 ${
-                    index % 2 === 0 ? 'bg-white' : 'bg-slate-50/30'
-                  }`}
+                <tr
+                  key={trend.topic}
+                  className={`border-b border-slate-50 transition-colors hover:bg-slate-50/50 ${index % 2 === 0 ? 'bg-white' : 'bg-slate-50/30'
+                    }`}
                 >
                   <td className="px-6 py-4 font-bold text-slate-900 capitalize">{trend.topic}</td>
                   <td className="px-6 py-4 text-center text-slate-600 font-medium">{trend.course_count}</td>
@@ -114,7 +111,7 @@ const TrendingPage = () => {
                     <div className="flex items-center gap-3">
                       <span className="text-sm font-black text-slate-900 w-8">{trend.demand_score}</span>
                       <div className="flex-grow h-2 bg-slate-100 rounded-full overflow-hidden">
-                        <div 
+                        <div
                           className="h-full bg-lime-400 rounded-full"
                           style={{ width: `${(trend.demand_score / maxDemand) * 100}%` }}
                         ></div>
