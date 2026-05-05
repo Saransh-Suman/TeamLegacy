@@ -10,7 +10,7 @@ import SearchPage from './pages/consumer/Search';
 import CourseDetail from './pages/consumer/CourseDetail';
 import CreatorDashboard from './pages/creator/Dashboard';
 import TrendingPage from './pages/Trending';
-import CompetitorPage from './pages/creator/Competitor';
+import CompetitorPage from './pages/CompetitorAnalysis';
 import RegisterCourse from './pages/RegisterCourse';
 import MyCourses from './pages/MyCourses';
 import PricingAnalysis from './pages/PricingAnalysis';
