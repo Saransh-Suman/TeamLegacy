@@ -13,6 +13,7 @@ import TrendingPage from './pages/Trending';
 import CompetitorPage from './pages/creator/Competitor';
 import RegisterCourse from './pages/RegisterCourse';
 import MyCourses from './pages/MyCourses';
+import PricingAnalysis from './pages/PricingAnalysis';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path="/creator/competitor" element={<CompetitorPage />} />
           <Route path="/creator/register" element={<RegisterCourse />} />
           <Route path="/creator/courses" element={<MyCourses />} />
+          <Route path="/pricing/:id" element={<PricingAnalysis />} />
         </Routes>
       </main>
     </div>
