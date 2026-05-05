@@ -11,6 +11,7 @@ import creatorRoutes from './routes/creator/index.js';
 import registerRoute from './routes/creator/register.js';
 import myCoursesRoute from './routes/creator/myCourses.js';
 import trendingRoute from './routes/creator/trending.js';
+import pricingAnalysisRoute from './routes/creator/pricingAnalysis.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -24,6 +25,7 @@ app.use('/api/creator', creatorRoutes);
 app.use('/api/creator', registerRoute);
 app.use('/api/creator', myCoursesRoute);
 app.use('/api/creator', trendingRoute);
+app.use('/api/creator', pricingAnalysisRoute);
 
 // Global Error Handler
 app.use((err, req, res, next) => {
