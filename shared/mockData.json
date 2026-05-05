@@ -1,0 +1,112 @@
+{
+  "courses": [
+    {
+      "id": "1",
+      "title": "EV Battery Management Systems",
+      "platform": "udemy",
+      "price_inr": 499,
+      "original_price_inr": 3499,
+      "discount_percent": 86,
+      "rating": 4.5,
+      "hours": 12,
+      "level": "intermediate",
+      "topic": "battery",
+      "url": "https://www.udemy.com/course/ev-battery",
+      "hidden_gem": true
+    },
+    {
+      "id": "2",
+      "title": "Electric Vehicle Charging Infrastructure",
+      "platform": "coursera",
+      "price_inr": 1200,
+      "original_price_inr": 1200,
+      "discount_percent": 0,
+      "rating": 4.2,
+      "hours": 20,
+      "level": "beginner",
+      "topic": "charging",
+      "url": "https://www.coursera.org/learn/ev-charging",
+      "hidden_gem": false
+    },
+    {
+      "id": "3",
+      "title": "Advanced EV Motor Control",
+      "platform": "udemy",
+      "price_inr": 699,
+      "original_price_inr": 4999,
+      "discount_percent": 86,
+      "rating": 4.7,
+      "hours": 15,
+      "level": "advanced",
+      "topic": "motor",
+      "url": "https://www.udemy.com/course/ev-motor",
+      "hidden_gem": true
+    },
+    {
+      "id": "4",
+      "title": "EV Technology Professional Certificate",
+      "platform": "internshala",
+      "price_inr": 2999,
+      "original_price_inr": 5999,
+      "discount_percent": 50,
+      "rating": 4.4,
+      "hours": 40,
+      "level": "intermediate",
+      "topic": "general",
+      "url": "https://trainings.internshala.com/ev-training",
+      "hidden_gem": false
+    },
+    {
+      "id": "5",
+      "title": "EV Power Electronics",
+      "platform": "coursera",
+      "price_inr": 1500,
+      "original_price_inr": 1500,
+      "discount_percent": 0,
+      "rating": 4.6,
+      "hours": 25,
+      "level": "intermediate",
+      "topic": "general",
+      "url": "https://www.coursera.org/learn/ev-power",
+      "hidden_gem": false
+    }
+  ],
+  "trending_topics": [
+    {
+      "topic": "battery",
+      "course_count": 45,
+      "avg_price": 850,
+      "demand_score": 88.5
+    },
+    {
+      "topic": "charging",
+      "course_count": 30,
+      "avg_price": 1100,
+      "demand_score": 75.2
+    },
+    {
+      "topic": "motor",
+      "course_count": 25,
+      "avg_price": 950,
+      "demand_score": 82.1
+    }
+  ],
+  "competitors": [
+    {
+      "title": "EV Battery Masterclass",
+      "platform": "udemy",
+      "price_inr": 499,
+      "rating": 4.8,
+      "strengths": ["Price", "Rating"],
+      "weaknesses": ["Course Depth"]
+    },
+    {
+      "title": "Battery Technology for EVs",
+      "platform": "coursera",
+      "price_inr": 1200,
+      "rating": 4.4,
+      "strengths": ["Certification", "Expert Instructors"],
+      "weaknesses": ["High Price"]
+    }
+  ]
+}
