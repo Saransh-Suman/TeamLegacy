@@ -11,7 +11,7 @@ export const getSuggestionsRoute = async (req, res) => {
     const { id } = req.params;
 
     const { data: course, error } = await supabase
-      .from('courses')
+      .from('creator_courses')
       .select('*')
       .eq('id', id)
       .single();

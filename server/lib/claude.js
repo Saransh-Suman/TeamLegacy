@@ -1,45 +1,50 @@
 /**
- * Claude API Client
- * Wraps Anthropic Messages API.
+ * AI API Client
+ * Wraps Hugging Face Inference API for mistralai/Mistral-7B-Instruct-v0.3.
+ * Maintains askClaude signature for backward compatibility with existing services.
  */
 
 import 'dotenv/config';
 
-/**
- * Calls Claude API with a prompt.
- */
 export async function askClaude(prompt, systemPrompt = '') {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  
+  const apiKey = process.env.HF_API_KEY;
+
   if (!apiKey) {
-    throw new Error('ANTHROPIC_API_KEY is missing');
+    throw new Error('HF_API_KEY is missing');
+  }
+
+  let inputText;
+  if (systemPrompt) {
+    inputText = systemPrompt + '\n\n' + prompt;
+  } else {
+    inputText = prompt;
   }
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch('https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.3', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01'
+        'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: 'claude-3-5-sonnet-20240620', // Updated to a valid model name
-        max_tokens: 1000,
-        system: systemPrompt,
-        messages: [{ role: 'user', content: prompt }]
+        inputs: inputText,
+        parameters: {
+          max_new_tokens: 1000,
+          temperature: 0.3,
+          return_full_text: false
+        }
       })
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(`Claude API Error: ${errorData.error?.message || response.statusText}`);
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || response.statusText);
     }
 
     const data = await response.json();
-    return data.content[0].text;
+    return data[0].generated_text;
   } catch (error) {
-    console.error('Error calling Claude:', error.message);
-    throw new Error(`AI Service Unavailable: ${error.message}`);
+    throw new Error('HF API call failed: ' + error.message);
   }
 }
