@@ -1,45 +1,54 @@
 /**
- * Claude API Client
- * Wraps Anthropic Messages API.
+ * AI API Client
+ * Wraps Google Gemini API (gemini-1.5-flash).
+ * Maintains askClaude signature for backward compatibility with existing services.
  */
 
 import 'dotenv/config';
 
-/**
- * Calls Claude API with a prompt.
- */
 export async function askClaude(prompt, systemPrompt = '') {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  
+  const apiKey = process.env.GEMINI_API_KEY;
+
   if (!apiKey) {
-    throw new Error('ANTHROPIC_API_KEY is missing');
+    throw new Error('GEMINI_API_KEY is missing');
   }
 
+  const fullPrompt = systemPrompt ? systemPrompt + '\n\n' + prompt : prompt;
+
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01'
-      },
-      body: JSON.stringify({
-        model: 'claude-3-5-sonnet-20240620', // Updated to a valid model name
-        max_tokens: 1000,
-        system: systemPrompt,
-        messages: [{ role: 'user', content: prompt }]
-      })
-    });
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          contents: [
+            { parts: [{ text: fullPrompt }] }
+          ],
+          generationConfig: {
+            temperature: 0.3,
+            maxOutputTokens: 8192
+          }
+        })
+      }
+    );
 
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(`Claude API Error: ${errorData.error?.message || response.statusText}`);
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error?.message || response.statusText);
     }
 
     const data = await response.json();
-    return data.content[0].text;
-  } catch (error) {
-    console.error('Error calling Claude:', error.message);
-    throw new Error(`AI Service Unavailable: ${error.message}`);
+    console.log('DEBUG DATA:', JSON.stringify(data, null, 2));
+    
+    if (data.candidates?.[0]?.finishReason && data.candidates[0].finishReason !== 'STOP') {
+      console.warn('WARNING: Gemini finished with reason:', data.candidates[0].finishReason);
+    }
+
+    return data.candidates[0].content.parts[0].text;
+  } catch (err) {
+    throw new Error('Gemini API call failed: ' + err.message);
   }
 }
