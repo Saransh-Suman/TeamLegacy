@@ -436,3 +436,9 @@ This project was built for educational and hackathon purposes.
 <div align="center">
   <strong>⚡ Empowering EV learners and creators with data-driven insights</strong>
 </div>
+
+
+<img width="1917" height="912" alt="Screenshot 2026-05-05 153226" src="https://github.com/user-attachments/assets/2e8e5aa5-8ee1-4b90-9797-7897183d096d" />
+<img width="1919" height="916" alt="Screenshot 2026-05-05 153943" src="https://github.com/user-attachments/assets/8f2a3411-3ae5-442a-b2ed-5d6ef35e4ec4" />
+<img width="1919" height="915" alt="Screenshot 2026-05-05 154040" src="https://github.com/user-attachments/assets/f04091d2-b3fc-4559-b076-0f62dccb3e20" />
+<img width="1911" height="910" alt="Screenshot 2026-05-05 164950" src="https://github.com/user-attachments/assets/0e6df934-7ef3-4349-b89f-471043a42c20" />
