@@ -367,7 +367,7 @@ PORT=3000
 | `SUPABASE_SERVICE_KEY` | Supabase Dashboard → Settings → API |
 | `GEMINI_API_KEY` | [Google AI Studio](https://aistudio.google.com/app/apikey) |
 
-> ⚠️ **Never commit your `.env` file.** It is already listed in `.gitignore`.
+
 
 ---
 
